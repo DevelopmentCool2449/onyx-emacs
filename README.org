@@ -1,0 +1,45 @@
+#+title: OnyX - An Emacs Android configuration for Org and Markdown Note Taking
+#+author: Elijah Gabe P.
+
+OnyX *Emacs* is a configuration focused on creating and managing *Org-mode* and *Markdown*
+based notes *for Android*, with an *intuitive* an easy UI.
+
+*⚠️ NOTE: This configuration is intended for Emacs Android Port and may not work correctly on other OS.*
+
+* Requirements
+
++ Android 2.2 or 15.0 version.
++ Android Emacs Port (latest release).
++ =Symbols Nerd Font= and =RobotoMono Nerd Font=.
++ ~git~ /(optional)/
+
+* Installation
+** Installing Emacs
+The most recommended way to install Emacs is [[https://f-droid.org/en/package/org.gnu.emacs][from F-Droid]], download the build that
+is *compatible with your architecture* /(usually those with the "recommended" label)/.
+
+If you have problems installing packages, [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Android-Software.html][it may be necessary to install
+additional applications such as Termux]], you can find specific builds to allow
+the use of Termux applications on [[https://sourceforge.net/projects/android-ports-for-gnu-emacs/files/termux/][Android ports for GNU Emacs Files sourceforge]]
+and install both Emacs and Termux .apk packages.
+
+** Installing OnyX
+Download this repository, inside OnyX folder create a directory called =fonts= and
+install the fonts you prefer to use in Emacs (Onyx uses =Symbols Nerd Font= and
+=RobotoMono Nerd Font= fonts, make sure they are downloaded in fonts folder, you
+can download them [[https://www.nerdfonts.com/font-downloads][here]]).
+
+And move Onyx Directory to the path you prefer on Android (usually,
+it's recommended somewhere in =/storage/emulated/0/=).
+
+Once downloaded, launch Emacs, go to *Edit > Execute Command* and type ~eshell~
+
+within eshell prompt run this command to make a symbolic link from Onyx path
+to \~/.emacs.d directory:
+
+#+begin_src shell
+ln -s /storage/emulated/0/<path-to-onyx> ~/.emacs.d
+#+end_src
+
+Then close emacs and reopen it, and OnyX will take care of making a symbolic link
+from the fonts folder to ~/fonts.
