@@ -1,9 +1,3 @@
-(set-frame-font "RobotoMono Nerd Font 15" nil t)
-
-(if-let* ((font "Segoe UI Emoji")
-          ((member font (font-family-list))))
-    (set-fontset-font t 'emoji (font-spec :family font) nil 'prepend))
-
 (use-package form-feed-st
   :diminish
   :config (global-form-feed-st-mode 1)
@@ -94,7 +88,12 @@
               ((not (file-exists-p target)))
               ((file-exists-p link)))
     (make-symbolic-link link target)
-    (message "Symbolic link created: %s -> %s" link target)))
+    (message "Symbolic link created: %s -> %s" link target))
+
+  ;; And set font.
+  (if-let* ((font "RobotoMono Nerd Font")
+            ((member font (font-family-list))))
+      (set-frame-font (concat font " 15") nil t)))
 
 (use-package nerd-icons-completion :demand t
   :hook

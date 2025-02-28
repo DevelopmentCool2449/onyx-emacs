@@ -7,7 +7,6 @@
   (centaur-tabs-icon-type 'nerd-icons)
   (centaur-tabs-enable-key-bindings t) ; Enable Centaur Tabs Key bindings
   (centaur-tabs-set-modified-marker t)
-  (centaur-tabs-modified-marker "●")
   (centaur-tabs-show-navigation-buttons t) ; Navigations Buttons
   (centaur-tabs-backward-tab-text
    (concat " " (nerd-icons-faicon "nf-fa-chevron_circle_left") " "))

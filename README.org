@@ -47,4 +47,6 @@ from the fonts folder to ~/fonts.
 OnyX tries to be as simple as possible regarding configurations, inside the OnyX
 directory you can find a file =user-configurations.el= that is intended to save
 personal configurations and packages, you can also customize all the internal
-files of OnyX, feel free to do so.
+files of OnyX.
+
+*Feel Free to do so!*
