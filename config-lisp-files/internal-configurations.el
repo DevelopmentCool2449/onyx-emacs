@@ -62,11 +62,11 @@
   ;; Create symbolic link for fonts directory from emacs dotfiles
   ;; directory.  If ~/fonts exists and fonts from user emacs directory
   ;; doesn't exist then do nothing.
-  (when-let* (((yes-or-no-p "Do you want to create `fonts' folder?"))
-              (target (expand-file-name "~/fonts"))
+  (when-let* ((target (expand-file-name "~/fonts"))
               (link (expand-file-name "fonts" user-emacs-directory))
               ((not (file-exists-p target)))
-              ((file-exists-p link)))
+              ((file-exists-p link))
+              ((yes-or-no-p "Do you want to create `fonts' folder?")))
     (make-symbolic-link link target)
     (message "Symbolic link created: %s -> %s" link target))
   ;; And set font.

@@ -63,7 +63,7 @@
 (when (display-graphic-p)
   (setopt tool-bar-style 'image
           tool-bar-position 'bottom)
-  (modifier-bar-mode t)
+  (if (eq system-type 'android) (modifier-bar-mode t))
 
   (tool-bar-add-item-from-menu 'undo-redo "redo" nil) ; Add Redo
 
