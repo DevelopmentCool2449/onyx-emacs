@@ -1,9 +1,10 @@
-;; This file is intended to store private or personal configurations,
-;; such as emails, passwords, packages, hooks, etc.
-(setopt
- user-full-name "John Doe" ; Your full name
- user-mail-address "example@host.domain" ; Your email address
- )
+;;; This file is intended to store private or personal configurations,
+;;; such as emails, passwords, packages, hooks, etc.
+
+;; (setopt
+;; user-full-name "John Doe" ; Your full name
+;; user-mail-address "example@host.domain" ; Your email address
+;; )
 
 ;; (use-package wakib-keys :diminish
 ;;   :custom (wakib-keys t nil (wakib-keys))

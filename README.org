@@ -7,7 +7,6 @@ based notes *for Android*, with an *intuitive* an easy UI.
 *⚠️ NOTE: This configuration is intended for Emacs Android Port and may not work correctly on other OS.*
 
 * Requirements
-
 + Android 2.2 or 15.0 version.
 + Android Emacs Port (latest release).
 + =Symbols Nerd Font= and =RobotoMono Nerd Font=.
@@ -43,3 +42,9 @@ ln -s /storage/emulated/0/<path-to-onyx> ~/.emacs.d
 
 Then close emacs and reopen it, and OnyX will take care of making a symbolic link
 from the fonts folder to ~/fonts.
+
+* User configurations
+OnyX tries to be as simple as possible regarding configurations, inside the OnyX
+directory you can find a file =user-configurations.el= that is intended to save
+personal configurations and packages, you can also customize all the internal
+files of OnyX, feel free to do so.
