@@ -36,7 +36,7 @@ it's recommended somewhere in =/storage/emulated/0/=).
 Once downloaded, launch Emacs, go to *Edit > Execute Command* and type ~eshell~
 
 within eshell prompt run this command to make a symbolic link from Onyx path
-to \~/.emacs.d directory:
+to ~/.emacs.d directory:
 
 #+begin_src shell
 ln -s /storage/emulated/0/<path-to-onyx> ~/.emacs.d
