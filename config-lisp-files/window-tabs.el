@@ -3,11 +3,10 @@
   (emacs-startup . centaur-tabs-mode)
   :custom
   (centaur-tabs-cycle-scope 'tabs)
-  (centaur-tabs-style "slant")
   (centaur-tabs-icon-type 'nerd-icons)
   (centaur-tabs-enable-key-bindings t) ; Enable Centaur Tabs Key bindings
   (centaur-tabs-set-modified-marker t)
-  (centaur-tabs-modified-marker (nerd-icons-faicon "nf-fa-circle_dot"))
+  (centaur-tabs-modified-marker (nerd-icons-octicon "nf-oct-dot_fill"))
   (centaur-tabs-show-navigation-buttons t) ; Navigations Buttons
   (centaur-tabs-backward-tab-text
    (concat " " (nerd-icons-faicon "nf-fa-chevron_circle_left") " "))
@@ -17,6 +16,7 @@
    (concat " " (nerd-icons-faicon "nf-fa-chevron_circle_down") " "))
   (centaur-tabs-set-icons t) ; Icons
   (centaur-tabs-gray-out-icons 'buffer)
+  (centaur-tabs-height 80)
   :config
   (dolist (centaur-face '(centaur-tabs-selected
                           centaur-tabs-selected-modified

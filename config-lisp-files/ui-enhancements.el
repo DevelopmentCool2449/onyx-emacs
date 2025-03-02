@@ -78,22 +78,7 @@
   (olivetti-style 'fancy)
   (olivetti-body-width 100))
 
-(use-package nerd-icons :demand t
-  :config
-  ;; Create symbolic link for fonts directory from emacs dotfiles
-  ;; directory.  If ~/fonts exists and fonts from user emacs directory
-  ;; doesn't exist then do nothing.
-  (when-let* ((target (expand-file-name "~/fonts"))
-              (link (expand-file-name "fonts" user-emacs-directory))
-              ((not (file-exists-p target)))
-              ((file-exists-p link)))
-    (make-symbolic-link link target)
-    (message "Symbolic link created: %s -> %s" link target))
-
-  ;; And set font.
-  (if-let* ((font "RobotoMono Nerd Font")
-            ((member font (font-family-list))))
-      (set-frame-font (concat font " 15") nil t)))
+(use-package nerd-icons :demand t)
 
 (use-package nerd-icons-completion :demand t
   :hook
