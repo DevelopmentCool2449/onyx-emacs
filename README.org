@@ -1,6 +1,8 @@
 #+title: OnyX - An Emacs Android configuration for Org and Markdown Note Taking
 #+author: Elijah Gabe P.
 
+[[./assets/readme-images/screenshot.jpg]]
+
 OnyX *Emacs* is a configuration focused on creating and managing *Org-mode* and *Markdown*
 based notes *for Android*, with an *intuitive* an easy UI.
 
