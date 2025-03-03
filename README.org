@@ -35,7 +35,14 @@ it's recommended somewhere in =/storage/emulated/0/=).
 
 Once downloaded, launch Emacs, go to *Edit > Execute Command* and type ~eshell~
 
-within eshell prompt run this command to make a symbolic link from Onyx path
+within eshell prompt, it's best to delete the old ~/.emacs.d directory if exists,
+run this command to remove it recursively:
+
+#+begin_src shell
+rm -r ~/.emacs.d
+#+end_src
+
+Now run this command to make a symbolic link from Onyx path
 to ~/.emacs.d directory:
 
 #+begin_src shell
