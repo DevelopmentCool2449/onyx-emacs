@@ -1,9 +1,5 @@
 (use-package dashboard
   :hook
-  (window-configuration-change
-   . (lambda ()
-       (if (and (dirvish-side--session-visible-p) (derived-mode-p 'dashboard-mode))
-           (delete-window (dirvish-side--session-visible-p)))))
   (after-init . dashboard-setup-startup-hook)
   (dashboard-before-initialize . turn-on-solaire-mode)
   (dashboard-mode . (lambda ()

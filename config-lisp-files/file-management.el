@@ -18,6 +18,10 @@
 
 (use-package dirvish
   :hook
+  (window-configuration-change
+   . (lambda ()
+       (if (and (dirvish-side--session-visible-p) (derived-mode-p 'dashboard-mode))
+           (delete-window (dirvish-side--session-visible-p)))))
   (dired-mode . auto-revert-mode)
   (dirvish-find-entry
    . (lambda (&rest _)

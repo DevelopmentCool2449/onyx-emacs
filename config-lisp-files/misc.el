@@ -1,18 +1,5 @@
 (global-completion-preview-mode t)
 
-(advice-add 'consult-buffer :before
-            (lambda (&rest _)
-              (recentf-mode +1)))
-
-(advice-add 'consult-recent-file :before
-            (lambda (&rest _)
-              (recentf-mode +1)))
-
-;; (use-package magit
-;;   :commands magit-status
-;;   :custom
-;;   (magit-format-file-function #'magit-format-file-nerd-icons))
-
 (use-package orderless
   :custom
   (completion-styles '(orderless basic))
@@ -33,10 +20,11 @@
   (whitespace-line-column nil)
   (whitespace-display-mappings
    '((space-mark 32 [183] [46]) (space-mark 160 [164] [95])
-     (newline-mark 10 [11154 10]) (tab-mark 9 [8250 9] [92 9])))
-  (whitespace-style '(face spaces space-mark trailing
-                           tabs tab-mark
-                           newline newline-mark))
+     (newline-mark 10 [36 10]) (tab-mark 9 [8250 9] [92 9])))
+  (whitespace-style '(face
+                      spaces space-mark trailing
+                      tabs tab-mark
+                      newline newline-mark))
   :config
   (set-face-attribute 'whitespace-tab nil :background nil))
 
@@ -53,7 +41,7 @@
   (electric-pair-open-newline-between-pairs t)
   :hook
   ((prog-mode text-mode conf-mode) . electric-pair-mode)
-  (message-mode
+  ((text-mode message-mode)
    . (lambda ()
        (setq-local electric-pair-pairs
                    (append electric-pair-pairs

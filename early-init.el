@@ -1,7 +1,28 @@
-;;; early-init.el ---                                -*- lexical-binding: t; -*-
-(setenv "LSP_USE_PLISTS" "true")
+;; -*- lexical-binding: t; -*-
+;; This file is loaded before the package system and GUI is initialized.
+;; Intended for:
+;; - Setting GC thresholds for faster startup
+;; - Disabling unnecessary UI elements early
+;; - Setting up basic frame parameters
+;; - Optimizing startup performance
 
-;; Disable Scroll Bar in minibuffer window
+;; Variables
+(setopt debug-on-error (and (not noninteractive)
+                            init-file-debug)
+        inhibit-startup-screen t
+        native-comp-async-report-warnings-errors 'silent
+        ;; smooth frame rezising..
+        frame-resize-pixelwise t)
+
+;; Debug config files
+(if (getenv "DEBUG")
+    (setq init-file-debug t))
+
+;; Kill scratch Buffer
+(if (get-buffer "*scratch*")
+    (kill-buffer "*scratch*"))
+
+;; Disable scroll-bars and fringes in minibuffer.
 (add-hook 'after-make-frame-functions
           (lambda (frame)
             (set-window-scroll-bars
@@ -9,25 +30,23 @@
             (set-window-fringes
              (minibuffer-window frame) 0 0 nil t)))
 
-(defvar startup/file-name-handler-alist file-name-handler-alist)
-;; Defer garbage collection further back in the startup process
-(setopt gc-cons-threshold most-positive-fixnum
-        gc-cons-percentage 0.6
-
-        ;; In noninteractive sessions, prioritize non-byte-compiled source files to
-        ;; prevent the use of stale byte-code. Otherwise, it saves us a little IO time
-        ;; to skip the mtime checks on every *.elc file.
-        load-prefer-newer noninteractive
-
-        ;; `use-package' is builtin since 29.
-        ;; It must be set before loading `use-package'.
-        use-package-enable-imenu-support t)
-(setq file-name-handler-alist nil)
+;; Performance optimization during startup
+(let ((normal-gc-cons-threshold gc-cons-threshold)
+      (normal-gc-cons-percentage gc-cons-percentage)
+      (normal-file-name-handler-alist file-name-handler-alist)
+      (init-gc-cons-threshold most-positive-fixnum)
+      (init-gc-cons-percentage 0.6))
+  (setq gc-cons-threshold init-gc-cons-threshold
+        gc-cons-percentage init-gc-cons-percentage
+        file-name-handler-alist nil)
+  (add-hook 'after-init-hook
+            `(lambda ()
+               (setq gc-cons-threshold ,normal-gc-cons-threshold
+                     gc-cons-percentage ,normal-gc-cons-percentage
+                     file-name-handler-alist ',normal-file-name-handler-alist))))
 
 (when (eq system-type 'android)
   (setenv "PATH" (format "%s:%s" "/data/data/com.termux/files/usr/bin"
                          (getenv "PATH")))
   (push "/data/data/com.termux/files/usr/bin" exec-path)
   (setopt image-scaling-factor 3.0))
-
-;;; early-init.el ends here

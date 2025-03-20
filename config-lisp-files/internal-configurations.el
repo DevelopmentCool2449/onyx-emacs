@@ -3,7 +3,7 @@
   :hook
   ((prog-mode text-mode conf-mode help-mode)
    . visual-wrap-prefix-mode)
-  ((prog-mode text-mode conf-mode) . display-line-numbers-mode)
+  ((prog-mode conf-mode) . display-line-numbers-mode)
   :custom
   (undo-limit 80000000)
   (recentf-auto-cleanup 300)
@@ -47,12 +47,6 @@
 
   (use-short-answers t)
   :config
-  (advice-add 'y-or-n-p :around
-              (lambda (orig-func &rest args)
-                (let ((query-replace-map (copy-keymap query-replace-map)))
-                  (keymap-set query-replace-map "<return>" 'act)
-                  (apply orig-func args))))
-
   ;; Set Coding System
   (if (fboundp 'set-charset-priority)
       (set-charset-priority 'unicode))

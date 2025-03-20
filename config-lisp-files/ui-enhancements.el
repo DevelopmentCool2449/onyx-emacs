@@ -1,34 +1,12 @@
 (use-package form-feed-st
   :diminish
-  :config (global-form-feed-st-mode 1)
-  (dolist (modes '(browse-kill-ring-mode
-                   emacs-lisp-compilation-mode
-                   outline-mode
-                   emacs-news-view-mode))
-    (add-to-list 'form-feed-st-include-modes modes)))
-
-(use-package fill-column
-  :ensure nil
   :hook
-  ((prog-mode text-mode) . display-fill-column-indicator-mode)
-  (display-fill-column-indicator-mode
-   . (lambda ()
-       (add-hook
-        'post-command-hook
-        (lambda ()
-          (if (> (save-excursion (end-of-line) (current-column))
-                 fill-column)
-              (progn
-                (setq-local
-                 display-fill-column-indicator-character 9475)
-                (face-remap-set-base 'fill-column-indicator
-                                     (list :inherit 'error :stipple nil
-                                           :box nil :strike-through nil
-                                           :overline nil :underline nil)))
-            (setq-local
-             display-fill-column-indicator-character 9474)
-            (face-remap-reset-base 'fill-column-indicator)))
-        nil t))))
+  ((prog-mode
+    conf-mode
+    outline-mode
+    emacs-news-view-mode
+    emacs-lisp-compilation-mode)
+   . form-feed-st-mode))
 
 (setopt window-divider-default-places t
         window-divider-default-bottom-width 4
@@ -70,9 +48,7 @@
   :commands olivetti-mode
   :hook ((Custom-mode
           Info-mode
-          image-mode
-          org-mode
-          markdown-mode)
+          image-mode)
          . olivetti-mode)
   :custom
   (olivetti-style 'fancy)

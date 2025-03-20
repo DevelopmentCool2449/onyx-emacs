@@ -1,54 +1,53 @@
 ;;; init.el -- OnyX Emacs -*- lexical-binding: t; -*-
 ;;; Code:
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (setopt gc-cons-threshold 800000
-                    gc-cons-percentage 0.1
-                    file-name-handler-alist startup/file-name-handler-alist)))
+(let ((config-dir (expand-file-name "config-lisp-files" user-emacs-directory))
+      (modules
+       '(;; Core Setup
+         "packages"                 ; Package management setup
+         "key-mappings"             ; Basic Keybindings
+         "internal-configurations"  ; Basic Emacs settings
 
-(let ((configuration-directory (concat user-emacs-directory "config-lisp-files/")))
-  (load (concat configuration-directory "packages"))
+         ;; UI and Aesthetics
+         "custom-themes"            ; Theme configuration
+         "tool-bar"                 ; Toolbar settings
+         "menu-bar"                 ; Menu bar settings
+         "mode-line"                ; Modeline customization
+         "window-tabs"              ; Tab bar configuration
+         "dashboard"                ; Startup dashboard
+         "ui-enhancements"          ; Additional UI improvements
 
-  (load (concat configuration-directory "internal-configurations"))
+         ;; Editor Enhancements
+         "syntax-highlighting"      ; Syntax coloring
+         "spell-checking"           ; Spell checking configuration
 
-  (load (concat configuration-directory "key-mappings"))
+         ;; Development Tools
+         "window-management"        ; Window layout management
+         "file-management"          ; File handling and navigation
+         "code-snippets"            ; Code snippet
 
-  (load (concat configuration-directory "syntax-highlighting"))
+         ;; Special Modes
+         "org-mode"                 ; Org mode configuration
+         "denote"                   ; Denote configuration (note taking system)
 
-  (load (concat configuration-directory "tool-bar"))
-  (load (concat configuration-directory "menu-bar"))
-
-  (load (concat configuration-directory "minibuffer"))
-  (load (concat configuration-directory "ui-enhancements"))
-  (load (concat configuration-directory "misc"))
-
-  (load (concat configuration-directory "spell-checking"))
-
-  (load (concat configuration-directory "window-management"))
-
-  (load (concat configuration-directory "file-management"))
-
-  (load (concat configuration-directory "mode-line"))
-
-  (load (concat configuration-directory "custom-themes"))
-
-  (load (concat configuration-directory "dashboard"))
-
-  (load (concat configuration-directory "org-mode"))
-  (load (concat configuration-directory "denote"))
-
-  (load (concat configuration-directory "window-tabs"))
-
-  (load (concat configuration-directory "code-snippets"))
-
-  (load (concat configuration-directory "auto-insert-templates")))
-
-(set-face-attribute 'custom-group-tag nil :height 1.2)
-(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
-(set-face-attribute 'region nil :extend nil)
+         ;; Miscellaneous
+         "minibuffer"               ; Minibuffer enhancements
+         "auto-insert-templates"    ; File templates
+         "misc"                     ; Other settings
+         )))
+  (dolist (module modules)
+    (let ((module-file (expand-file-name module config-dir)))
+      (condition-case-unless-debug err
+          (progn (load module-file nil t)
+                 (message "✔ Module `%s' loaded" module))
+        (error (user-error "Error loading module `%s': %s" module err))))))
 
 ;; Private User Configurations:
 (load (concat user-emacs-directory "user-configurations"))
+
+;; Faces
+(set-face-attribute 'custom-group-tag nil :height 1.2)
+(set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+(set-face-attribute 'region nil :extend nil)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

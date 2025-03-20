@@ -36,16 +36,22 @@
 ;;; KEY DEFINITIONS
 
 ;;; `Re-Binding' keys
-(bind-key "F" 'describe-face help-map) ; Bind describe-face
-
-(bind-keys :map isearch-mode-map
-           ("<up>"   . isearch-repeat-backward)
-           ("<down>" . isearch-repeat-forward))
-
 (bind-keys
  ("TAB" . indent-for-tab-command)
 
- ("<remap> <describe-key>"      . helpful-key) ; Helpful keybinding
+ ;; Helpful keybinding
+ ("<remap> <describe-key>"      . helpful-key)
  ("<remap> <describe-command>"  . helpful-command)
  ("<remap> <describe-variable>" . helpful-variable)
- ("<remap> <describe-function>" . helpful-callable))
+ ("<remap> <describe-function>" . helpful-callable)
+
+ ;; Bind describe-face
+ :map help-map
+ ("F" . describe-face )
+
+ :map isearch-mode-map
+ ("<up>"   . isearch-repeat-backward)
+ ("<down>" . isearch-repeat-forward)
+
+ :map y-or-n-p-map
+ ("<return>" . y-or-n-p-insert-y))
