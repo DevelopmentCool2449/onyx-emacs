@@ -64,11 +64,8 @@
     (make-symbolic-link link target)
     (message "Symbolic link created: %s -> %s" link target))
   ;; And set font.
-  :custom-face
-  (default ((t (:family "RobotoMono Nerd Font" :height 150
-                        :foundry "CYRE" :slant normal
-                        :weight regular :width normal))))
-
+  (if (member "RobotoMono Nerd Font" (font-family-list))
+      (set-frame-font "RobotoMono Nerd Font-15" nil t))
   :preface
   (advice-add #'fundamental-mode :after
               (lambda (&rest _)
